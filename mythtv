@@ -275,7 +275,7 @@ end
 begin
    prog = irexec
    button = Red
-   config = /home/marvin/.mythtv/myth_start.sh
+   config = myth_start.sh
 end
 
 # Amplifier Buttons
@@ -283,6 +283,6 @@ end
 begin
    prog = irexec
    button = Power
-   config = /home/marvin/.mythtv/myth_equipement.sh
+   config = myth_equipement.sh
 end
 

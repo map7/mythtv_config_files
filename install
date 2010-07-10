@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+pwd = `pwd`.chomp
+path = "#{pwd}/mythtv"
+`ln -s #{path} ~/.mythtv/lircrc`
+`mkdir ~/bin`
+`ln -s #{pwd}/*sh ~/bin`

@@ -1,1 +1,9 @@
 This is a collection of Mythtv config files and scripts I use on Mythbuntu 10.04
+
+
+Install ruby
+$ sudo apt-get install ruby
+
+Run install script
+$ ./install
+
