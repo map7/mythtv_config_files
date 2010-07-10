@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
-pwd = `pwd`.chomp
-path = "#{pwd}/mythtv"
-`ln -s #{path} ~/.mythtv/lircrc`
-`mkdir ~/bin`
-`ln -s #{pwd}/*sh ~/bin`
+unless File.exists?("#{ENV['HOME']}/.mythtv/lircrc")
+	pwd = `pwd`.chomp
+	path = "#{pwd}/mythtv"
+	`ln -s #{path} ~/.mythtv/lircrc`
+	`mkdir ~/bin`
+	`ln -s #{pwd}/*sh ~/bin`
+end
+
+%w[irda-utils xmacro].each do|pkg|
+	puts "install #{pkg}..."
+	`sudo apt-get install #{pkg}`
+end
+
