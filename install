@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-puts "Installing Remote Control"
-pwd = `pwd`.chomp
-
 def copy_config(from,to)
 	`rm #{to}` if File.exists?("#{to}.bak")
 	`mv #{to} #{to}.bak`
@@ -16,21 +13,37 @@ def install_pkgs(pkgs)
 	end
 end
 
-copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
-copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
-`mkdir ~/bin` unless File.exists?("~/bin")
-`ln -s #{pwd}/*sh ~/bin`
+puts "Do you want to install the Remote Control?"
+if gets =~ /[Yy]/
 
-install_pkgs(%w[irda-utils xmacro])
+	puts "Installing Remote Control"
+	pwd = `pwd`.chomp
 
-# Restart lirc
-`sudo service lirc restart`
+	copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
+	copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
-puts "\n\nInstalling Shepherd"
+	`mkdir ~/.config/autostart`
+	copy_config("#{pwd}/irexec.desktop","~/.config/autostart/irexec.desktop")
 
-install_pkgs(%w[xmltv libxml-simple-perl libalgorithm-diff-perl libgetopt-mixed-perl libcompress-zlib-perl libdata-dumper-simple-perl libdate-manip-perl liblist-compare-perl libdatetime-format-strptime-perl libhtml-parser-perl libxml-dom-perl libgd-gd2-perl libdigest-sha1-perl libarchive-zip-perl libio-string-perl libdbi-perl])
+	`mkdir ~/bin` unless File.exists?("~/bin")
+	`ln -s #{pwd}/*sh ~/bin`
 
-`wget http://www.whuffy.com/shepherd/shepherd`
-`perl shepherd`
+	install_pkgs(%w[irda-utils xmacro])
+
+	# Restart lirc
+	`sudo service lirc restart`
+end
+
+puts "\nDo you want to install the Shepherd?"
+if gets =~ /[Yy]/
+	puts "\nInstalling Shepherd"
+
+	install_pkgs(%w[xmltv libxml-simple-perl libalgorithm-diff-perl libgetopt-mixed-perl libcompress-zlib-perl libdata-dumper-simple-perl libdate-manip-perl liblist-compare-perl libdatetime-format-strptime-perl libhtml-parser-perl libxml-dom-perl libgd-gd2-perl libdigest-sha1-perl libarchive-zip-perl libio-string-perl libdbi-perl])
+
+	`wget http://www.whuffy.com/shepherd/shepherd`
+	`perl shepherd`
+end
+
+
 
