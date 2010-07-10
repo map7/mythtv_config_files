@@ -23,9 +23,6 @@ if gets =~ /[Yy]/
 	copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
 	copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
-	`mkdir ~/.config/autostart`
-	copy_config("#{pwd}/irexec.desktop","~/.config/autostart/irexec.desktop")
-
 	`mkdir ~/bin` unless File.exists?("~/bin")
 	`ln -s #{pwd}/*sh ~/bin`
 
