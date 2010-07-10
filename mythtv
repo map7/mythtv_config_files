@@ -167,16 +167,14 @@ end
 begin
     prog = mythtv
     button = Rewind
-    config = <
+    config = PgUp
 end
 
 begin
     prog = mythtv
     button = Forward
-    config = >
+    config = PgDown
 end
-
-# Could change Forsard to PgUp and Rewind to PgDown.
 
 begin
   prog = mythtv
@@ -187,7 +185,7 @@ end
 begin
    prog = mythtv
    button = Stop
-   config = O
+   config = ESC
 end
 
 begin
