@@ -11,7 +11,6 @@ end
 copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
 copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
-
 `mkdir ~/bin` unless File.exists?("~/bin")
 `ln -s #{pwd}/*sh ~/bin`
 
@@ -20,3 +19,5 @@ copy_config("#{pwd}/irexec","~/.lirc/irexec")
 	`sudo apt-get install #{pkg}`
 end
 
+# Restart lirc
+`sudo service lirc restart`
