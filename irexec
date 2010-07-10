@@ -31,11 +31,17 @@ begin
     delay = 0
 end
 
-# Amplifier Buttons
-# Power will change the AV source
+# Restart mythfrontend on Red button
 begin
    prog = irexec
    button = Red
    config = ~/bin/myth_start.sh
 end
 
+# Quit out of games with remote
+begin
+   prog = irexec
+   button = Back
+   repeat = 0
+   config = xmacroplay-keys :0 Escape
+end
