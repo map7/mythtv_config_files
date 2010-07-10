@@ -275,7 +275,7 @@ end
 begin
    prog = irexec
    button = Red
-   config = myth_start.sh
+   config = /home/mythserver/bin/myth_start.sh
 end
 
 # Amplifier Buttons

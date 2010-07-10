@@ -1,12 +1,19 @@
 #!/usr/bin/env ruby
 
-unless File.exists?("#{ENV['HOME']}/.mythtv/lircrc")
-	pwd = `pwd`.chomp
-	path = "#{pwd}/mythtv"
-	`ln -s #{path} ~/.mythtv/lircrc`
-	`mkdir ~/bin`
-	`ln -s #{pwd}/*sh ~/bin`
+pwd = `pwd`.chomp
+
+def copy_config(from,to)
+	`rm #{to}` if File.exists?("#{to}.bak")
+	`mv #{to} #{to}.bak`
+	`ln -s #{from} #{to}`
 end
+
+copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
+copy_config("#{pwd}/irexec","~/.lirc/irexec")
+
+
+`mkdir ~/bin` unless File.exists?("~/bin")
+`ln -s #{pwd}/*sh ~/bin`
 
 %w[irda-utils xmacro].each do|pkg|
 	puts "install #{pkg}..."
