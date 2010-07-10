@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+puts "Installing Remote Control"
 pwd = `pwd`.chomp
 
 def copy_config(from,to)
@@ -8,16 +9,28 @@ def copy_config(from,to)
 	`ln -s #{from} #{to}`
 end
 
+def install_pkgs(pkgs)
+	pkgs.each do|pkg|
+		puts "\tinstall #{pkg}..."
+		`sudo apt-get install #{pkg}`
+	end
+end
+
 copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
 copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
 `mkdir ~/bin` unless File.exists?("~/bin")
 `ln -s #{pwd}/*sh ~/bin`
 
-%w[irda-utils xmacro].each do|pkg|
-	puts "install #{pkg}..."
-	`sudo apt-get install #{pkg}`
-end
+install_pkgs(%w[irda-utils xmacro])
 
 # Restart lirc
 `sudo service lirc restart`
+
+puts "\n\nInstalling Shepherd"
+
+install_pkgs(%w[xmltv libxml-simple-perl libalgorithm-diff-perl libgetopt-mixed-perl libcompress-zlib-perl libdata-dumper-simple-perl libdate-manip-perl liblist-compare-perl libdatetime-format-strptime-perl libhtml-parser-perl libxml-dom-perl libgd-gd2-perl libdigest-sha1-perl libarchive-zip-perl libio-string-perl libdbi-perl])
+
+`wget http://www.whuffy.com/shepherd/shepherd`
+`perl shepherd`
+
