@@ -8,3 +8,5 @@ Run install script, this will install some required packages
 $ sudo ./install
 
 
+With the backup script you can copy that to your cron
+$ sudo cp backup/backup-system /etc/cron.daily

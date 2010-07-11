@@ -1,0 +1,82 @@
+#!/usr/bin/ruby
+#
+# backup-system 
+# This script backs up the whole LIVE system everynight into a roll over backup on a separate drive.
+#
+# Keep a configurable amount of days as a rollback.  Remove old backups.
+# Allow copying to external media such as a memory stick or external drive.  Must check that it exists and has enough room.
+# 
+# Report to a log file.
+#
+require 'logger'
+
+
+
+class Fixnum
+def seconds
+self
+end
+def minutes
+self * 60
+end
+def hours
+self * 60 * 60
+end
+def days
+self * 60 * 60 * 24
+end
+end
+
+
+# Set variables
+storage_dir = "/storage2/backup/"
+backup_dev = "/dev/sda1"
+keep_days = 7
+post_filename="-mythserver"
+
+# Create dates
+date = Time.now.strftime("%Y%m%d")
+prev_date = (Time.now - keep_days.days).strftime("%Y%m%d")
+
+# Create log
+log_file = "#{storage_dir}#{date}-ltsp.log"
+logger = Logger.new(log_file)
+
+# Create filename
+filename="#{date}#{post_filename}.fsa"
+backup_file = "#{storage_dir}#{filename}"
+prev_filename="#{storage_dir}#{prev_date}#{post_filename}.fsa"
+prev_log="#{storage_dir}#{prev_date}#{post_filename}.log"
+
+# Start log file
+output = %x[/usr/sbin/fsarchiver -V 2>&1]
+logger.info "Start backup
+
+Using #{output} 
+
+Show info about the archive
+fsarchive archinfo #{filename}
+
+To backup restore system start the rescue cd and put in a new hard drive, then:
+fsarchiver restfs -v #{filename} id=0,dest=#{backup_dev}
+"
+
+[prev_filename, prev_log].each do |file|
+if File.exists?(file)
+	logger.info "Remove #{file}..."
+	`rm #{file}`
+end
+end
+
+# Backup and log
+logger.info "Backup to #{backup_file}..."
+
+backup_cmd="/usr/sbin/fsarchiver savefs -z 9 -j 8 -v -A #{backup_file} #{backup_dev} 2>&1"
+logger.info "Performing command: \n#{backup_cmd}"
+
+output=%x(#{backup_cmd})
+logger.info output
+
+logger.info "End Backup"
+logger.close
+

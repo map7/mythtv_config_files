@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+#
+
+backup_dir = "i386"
+
+Dir.chdir("/opt/ltsp")
+
+date = Time.now.strftime("%Y%m%d-%H%M")
+filename="#{date}-i386.tar.gz"
+name = "/storage2/backup/chroot/#{filename}"
+
+if File.exists?(name)
+	puts "\nBackup file #{name} already exists, \nplease remove before running this backup script again.\n\n"
+	exit
+end
+
+puts "Backup #{backup_dir} to #{name}..."
+puts "Hit enter to continue"
+gets
+
+puts "Enter comment"
+comment = filename + " = " + gets.chomp
+
+puts "\n\nBacking up please wait....\n\n"
+`tar czvf #{name} #{backup_dir}`
+
+`echo "#{comment}" >> readme.txt`
+
