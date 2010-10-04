@@ -43,6 +43,7 @@ end
 
 # Go through all the files hash and print any which have more than 1 path
 duplicates = 0
+del_already=false
 
 puts "Do you want to be able to delete the duplicate once found? [n]"
 a=$stdin.gets.chomp
@@ -67,11 +68,18 @@ files.each { |key, value|
 
 		puts
 		value.each do|path|
-			if del
-				puts "Delete #{path}? [n]"
-				a=$stdin.gets.chomp
-				File.delete(path) if a=~/[yY]/
-			end	
+			if del_already
+				del_already=false
+			else
+				if del
+					puts "Delete #{path}? [n]"
+					a=$stdin.gets.chomp
+					if a=~/[yY]/
+						File.delete(path) 
+						del_already=true
+					end
+				end	
+			end
 		end
 	end
 }
