@@ -44,6 +44,10 @@ end
 # Go through all the files hash and print any which have more than 1 path
 duplicates = 0
 
+puts "Do you want to be able to delete the duplicate once found? [n]"
+a=$stdin.gets.chomp
+a =~ /[yY]/ ? del=true : del=false
+
 files.each { |key, value|
 	if value.size > 1
 		duplicates += 1
@@ -59,7 +63,15 @@ files.each { |key, value|
 			size = File.size(path)
 			
 			puts "\t#{size}\t#{date}\t#{path}"
+		end
 
+		puts
+		value.each do|path|
+			if del
+				puts "Delete #{path}? [n]"
+				a=$stdin.gets.chomp
+				File.delete(path) if a=~/[yY]/
+			end	
 		end
 	end
 }
