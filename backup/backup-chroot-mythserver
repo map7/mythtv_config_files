@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 #
+# backup-chroot-script
+#
+# This can be used on any LTSP machine to backup the client image to a bakcup
+# location
+#
+# Required
+#  - pbzip2
+#
+
+puts "Make sure you run this with root access"
 
 backup_dir = "i386"
 
@@ -22,7 +32,7 @@ puts "Enter comment"
 comment = filename + " = " + gets.chomp
 
 puts "\n\nBacking up please wait....\n\n"
-`tar czvf #{name} #{backup_dir}`
+`tar --use-compress-prog=pbzip2 -cf #{name} #{backup_dir}`
 
 `echo "#{comment}" >> readme.txt`
 
