@@ -10,3 +10,16 @@ $ sudo ./install
 
 With the backup script you can copy that to your cron
 $ sudo cp backup/backup-system /etc/cron.daily
+
+
+Finding duplicates utility
+$ cd <media area>
+
+Search for duplicate video files
+$ finddups -v
+
+Search for duplicate music files
+$ finddups -v
+
+Search specific file types
+$ finddups avi
