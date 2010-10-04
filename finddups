@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+#
+# Use to find duplicate files
+
+require 'find'
+
+type = ARGV[0]
+
+if type.nil?
+	puts "finddups help
+	Find duplicate files based purely on the filename.
+
+	Example:
+	./finddups .4gl
+	"
+	exit
+end
+
+puts "\n\nSearching for #{type}..."
+
+files = {} 
+dups = []
+
+Find.find('.') do |path|
+
+	# Check the type
+	if File.extname(path) == type
+		basename = File.basename(path)
+
+		unless File.symlink?(path) or File.dirname(path) =~ /sql/
+			# Check if it already exists in the array?
+			if files.include?(basename)
+				# Get the array of paths and adds the current found path
+				paths = files[basename]
+				paths.push(path)
+			else
+				# Add the current path to the files hash
+				files.merge!(basename => [path])
+			end
+		end
+	end
+end
+
+# Go through all the files hash and print any which have more than 1 path
+duplicates = 0
+
+files.each { |key, value|
+	if value.size > 1
+		duplicates += 1
+		puts "\n#{key}"
+		puts "\tSize\tDate\t\t\tPath"
+
+		value.each do|path|
+			# Get date
+			date = File.ctime(path)
+			date = date.strftime("%H:%M %d/%m/%Y")
+
+			# Get size
+			size = File.size(path)
+			
+			puts "\t#{size}\t#{date}\t#{path}"
+
+		end
+	end
+}
+
+
+if duplicates == 0
+	puts "\nNo duplicates found!\n\n"
+end
+
