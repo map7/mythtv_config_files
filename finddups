@@ -3,10 +3,15 @@
 # Use to find duplicate files
 # 
 
+
 require 'find'
 
 @files = {}
 type = ARGV[0]
+
+size_to_mb = lambda { |x| x = x / 1024 / 1024 }
+size_to_gb = lambda { |x| x = x / 1024 / 1024 / 1024 }
+size_to_str = lambda { |x| size_to_mb.call(x) < 1024 ? "#{size_to_mb.call(x)}mb" : "#{size_to_gb.call(x)}gb" }
 
 def check_type(path,type)
 
@@ -65,6 +70,7 @@ end
 
 # Go through all the files hash and print any which have more than 1 path
 duplicates = 0
+total_size = 0
 
 puts "Do you want to be able to delete the duplicate once found? [n]"
 a=$stdin.gets.chomp
@@ -76,7 +82,7 @@ a =~ /[yY]/ ? del=true : del=false
 	if value.size > 1
 		duplicates += 1
 		puts "\n#{key}"
-		puts "\tSize\tDate\t\t\tPath"
+		puts "\tSize\tByte Size\tDate\t\t\tPath"
 
 		value.each do|path|
 			# Get date
@@ -85,8 +91,9 @@ a =~ /[yY]/ ? del=true : del=false
 
 			# Get size
 			size = File.size(path)
+			total_size = total_size + size
 			
-			puts "\t#{size}\t#{date}\t#{path}"
+			puts "\t#{size_to_str.call(size)}\t#{size}\t#{date}\t#{path}"
 		end
 
 		puts
@@ -107,6 +114,9 @@ a =~ /[yY]/ ? del=true : del=false
 	end
 }
 
+puts "\nTotals"
+puts "Duplicates: #{duplicates}"
+puts "Size:       #{size_to_str.call(total_size)}"
 
 if duplicates == 0
 	puts "\nNo duplicates found!\n\n"
