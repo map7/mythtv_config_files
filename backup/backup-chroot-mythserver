@@ -17,7 +17,7 @@ Dir.chdir("/opt/ltsp")
 
 date = Time.now.strftime("%Y%m%d-%H%M")
 filename="#{date}-i386.tar.gz"
-name = "/storage2/backup/chroot/#{filename}"
+name = "/storage1/backup/chroot/#{filename}"
 
 if File.exists?(name)
 	puts "\nBackup file #{name} already exists, \nplease remove before running this backup script again.\n\n"

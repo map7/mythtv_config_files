@@ -37,8 +37,18 @@ if type.nil?
 	puts "finddups help
 	Find duplicate files based purely on the filename.
 
+	It's best to run this from the root directory.
+
+	DO NOT RUN THIS AS ROOT OR SUDO
+
 	Example:
-	./finddups .4gl
+	finddups 4gl
+
+	Scan for video files
+	finddups -v
+
+	Scan for music files
+	finddups -m
 	"
 	exit
 end
@@ -58,7 +68,7 @@ end
 
 dups = []
 
-Find.find('.') do |path|
+Find.find('/') do |path|
 	if types.nil?
 		check_type(path,type)
 	else
