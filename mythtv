@@ -270,17 +270,17 @@ end
 
 
 # Start Mythtv
-begin
-   prog = irexec
-   button = Red
-   config = /home/mythserver/bin/myth_start.sh
-end
+#begin
+#   prog = irexec
+#   button = Red
+#   config = myth_start.sh
+#end
 
 # Amplifier Buttons
 # Power will change the AV source
 begin
    prog = irexec
    button = Power
-   config = myth_equipement.sh
+   config = myth_equipment.sh
 end
 
