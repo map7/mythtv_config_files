@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+chmod -R 777 /storage1
+chmod -R 777 /storage2
