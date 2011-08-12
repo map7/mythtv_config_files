@@ -14,7 +14,7 @@ def install_pkgs(pkgs)
 end
 
 puts "Installing useful packages"
-install_pkgs(%w[xclip gkrellm htop screen vim zsh apt-file])
+install_pkgs(%w[xclip gkrellm htop screen vim zsh apt-file gnome-do fsarchiver])
 
 puts "Do you want to install the Remote Control?"
 if gets =~ /[Yy]/
