@@ -1000,9 +1000,9 @@ end
 
 # Amplifier Buttons
 # Power will change the AV source
-begin
-   prog = irexec
-   button = KEY_POWER
-   config = myth_equipment.sh
-end
+#begin
+#   prog = irexec
+#   button = KEY_POWER
+#   config = myth_equipment.sh
+#end
 

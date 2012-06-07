@@ -22,11 +22,10 @@ if gets =~ /[Yy]/
 	puts "Installing Remote Control"
 	pwd = `pwd`.chomp
 
-	copy_config("#{pwd}/mythtv","~/.mythtv/lircrc")
+	copy_config("#{pwd}/mythtv","~/.lirc/mythtv")
 	copy_config("#{pwd}/irexec","~/.lirc/irexec")
 
-	`mkdir ~/bin` unless File.exists?("~/bin")
-	`ln -s #{pwd}/*sh ~/bin`
+	`ln -s #{pwd}/*sh /usr/local/bin`
 
 	install_pkgs(%w[irda-utils xmacro])
 
