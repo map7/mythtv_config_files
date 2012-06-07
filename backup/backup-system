@@ -45,6 +45,7 @@ logger = Logger.new(log_file)
 # Create filename
 filename="#{date}#{post_filename}.fsa"
 backup_file = "#{storage_dir}#{filename}"
+prev_files="#{storage_dir}#{prev_date}"
 prev_filename="#{storage_dir}#{prev_date}#{post_filename}.fsa"
 prev_log="#{storage_dir}#{prev_date}#{post_filename}.log"
 
@@ -64,7 +65,7 @@ fsarchiver restfs -v #{filename} id=0,dest=#{backup_dev}
 [prev_filename, prev_log].each do |file|
 if File.exists?(file)
 	logger.info "Remove #{file}..."
-	`rm #{file}`
+	`rm #{prev_filels}*`
 end
 end
 
