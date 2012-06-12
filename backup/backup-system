@@ -72,10 +72,21 @@ end
 # Backup and log
 logger.info "Backup to #{backup_file}..."
 
-backup_cmd="/usr/sbin/fsarchiver savefs -z 9 -j 8 -v -A #{backup_file} #{backup_dev} 2>&1"
+# fsarchiver
+# -z 9 = High compression
+# -j 8 = Use two threads
+# -s 4000 = split on 4GB so that it fits on old FAT32 systems.
+# -c <password>
+# -v   = verbose
+# -A   = Allow to save a file system which is mounted (LIVE mode)
+# 2>&1 = Redirect stderr to stdout (Get all the information for our logfile)
+backup_cmd="/usr/sbin/fsarchiver savefs -z 9 -j 8 -s 2000 -v -A #{backup_file} #{backup_dev} 2>&1"
 logger.info "Performing command: \n#{backup_cmd}"
 
+# %x executes the command and stores the output into a variable, which we have called 'output'
 output=%x(#{backup_cmd})
+
+# Write output to our log file.
 logger.info output
 
 logger.info "End Backup"
