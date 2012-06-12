@@ -971,7 +971,7 @@ end
 begin
     prog = mythtv
     button = RecTV
-    config = Ctrl+r
+    config = ALT+R
 end
 
 
@@ -979,14 +979,14 @@ end
 begin
     prog = mythtv
     button = Guide
-    config = Alt+g
+    config = ALT+G
 end
 
 # DVDMenu = Bring up OSD & playlist menus.
 begin
     prog = mythtv
     button = KEY_DVD
-    config = Ctrl+d
+    config = ALT+D
 end
 
 
