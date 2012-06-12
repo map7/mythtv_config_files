@@ -65,7 +65,7 @@ fsarchiver restfs -v #{filename} id=0,dest=#{backup_dev}
 [prev_filename, prev_log].each do |file|
 if File.exists?(file)
 	logger.info "Remove #{file}..."
-	`rm #{prev_filels}*`
+	`rm #{prev_files}*`
 end
 end
 
