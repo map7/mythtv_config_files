@@ -38,10 +38,19 @@ begin
 end
 
 begin
-    remote = mceusb_hauppauge
+    remote = mceusb
     prog = mythtv
-    button = Rewind
-    config = <
+    button = KEY_REWIND
+    config = PgUp
+    repeat = 0
+    delay = 0
+end
+
+begin
+    remote = mceusb
+    prog = mythtv
+    button = KEY_FORWARD
+    config = PgDown
     repeat = 0
     delay = 0
 end
@@ -67,7 +76,7 @@ end
 begin
     remote = mceusb_hauppauge
     prog = mythtv
-    button = Back
+    button = KEY_BACK
     config = Escape
     repeat = 0
     delay = 0
@@ -112,7 +121,7 @@ end
 begin
     remote = mceusb_hauppauge
     prog = mythtv
-    button = OK
+    button = KEY_OK
     config = Return
     repeat = 0
     delay = 0
@@ -149,7 +158,7 @@ begin
     remote = mceusb_hauppauge
     prog = mythtv
     button = Home
-    config = M
+    config = Escape
     repeat = 0
     delay = 0
 end
@@ -181,23 +190,23 @@ begin
     delay = 0
 end
 
-begin
-    remote = mceusb_hauppauge
-    prog = mythtv
-    button = RecTV
-    config = R
-    repeat = 0
-    delay = 0
-end
+#begin
+#    remote = mceusb_hauppauge
+#    prog = mythtv
+#    button = RecTV
+#    config = R
+#    repeat = 0
+#    delay = 0
+#end
 
-begin
-    remote = mceusb_hauppauge
-    prog = mythtv
-    button = Guide
-    config = S
-    repeat = 0
-    delay = 0
-end
+#begin
+#    remote = mceusb_hauppauge
+#    prog = mythtv
+#    button = Guide
+#    config = S
+#    repeat = 0
+#    delay = 0
+#end
 
 begin
     remote = mceusb_hauppauge
@@ -613,14 +622,14 @@ begin
     delay = 0
 end
 
-begin
-    remote = mceusb
-    prog = mythtv
-    button = RecTV
-    config = R
-    repeat = 0
-    delay = 0
-end
+#begin
+#    remote = mceusb
+#    prog = mythtv
+#    button = RecTV
+#    config = R
+#    repeat = 0
+#    delay = 0
+#end
 
 begin
     remote = mceusb
@@ -752,7 +761,7 @@ begin
     remote = mceusb
     prog = mythtv
     button = KEY_REWIND
-    config = <
+    config = PgUp
     repeat = 0
     delay = 0
 end
@@ -761,7 +770,7 @@ begin
     remote = mceusb
     prog = mythtv
     button = KEY_FORWARD
-    config = >
+    config = PgDown
     repeat = 0
     delay = 0
 end
@@ -1000,9 +1009,9 @@ end
 
 # Amplifier Buttons
 # Power will change the AV source
-begin
-   prog = irexec
-   button = KEY_POWER
-   config = myth_equipment.sh
-end
+#begin
+#   prog = irexec
+#   button = KEY_POWER
+#   config = myth_equipment.sh
+#end
 
