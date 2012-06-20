@@ -833,7 +833,7 @@ begin
     remote = mceusb
     prog = mythtv
     button = KEY_HOME
-    config = M
+    config = Escape
     repeat = 0
     delay = 0
 end

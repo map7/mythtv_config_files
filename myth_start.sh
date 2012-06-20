@@ -10,4 +10,5 @@ if [ "$MYTHEXISTS" != "" ]; then
         done
 fi
 
-DISPLAY=:0 mythfrontend &
+sleep 2
+mythfrontend &
