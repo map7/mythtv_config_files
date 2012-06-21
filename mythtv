@@ -96,7 +96,7 @@ begin
     prog = mythtv
     button = Up
     config = Up
-    repeat = 0
+    repeat = 3
     delay = 0
 end
 
@@ -132,7 +132,7 @@ begin
     prog = mythtv
     button = Down
     config = Down
-    repeat = 0
+    repeat = 3
     delay = 0
 end
 
@@ -681,7 +681,7 @@ begin
     prog = mythtv
     button = KEY_DOWN
     config = Down
-    repeat = 0
+    repeat = 2
     delay = 0
 end
 
@@ -690,7 +690,7 @@ begin
     prog = mythtv
     button = KEY_UP
     config = Up
-    repeat = 0
+    repeat = 2
     delay = 0
 end
 
