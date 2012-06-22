@@ -1,0 +1,4 @@
+#!/bin/sh
+
+chown -R mythserver:mythtv /media/storage?
+chmod -R 775 /media/storage?

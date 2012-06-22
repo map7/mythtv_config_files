@@ -11,4 +11,5 @@ if [ "$MYTHEXISTS" != "" ]; then
 fi
 
 sleep 2
+storage_permissions &
 mythfrontend &
